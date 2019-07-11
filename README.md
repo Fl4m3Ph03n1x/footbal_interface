@@ -10,11 +10,13 @@ a simple REST API.
 
 The public API has 2 endpoints:
 
-- `/ping`: dummy endpoint that always returns `"ok"`. Used mainly to check if
-the server is up and running.
+- `/ping` 
+- `/search`
 
-- `/search`: allows users to query the engine and returns responses based on the
-queries made.
+### ping
+
+Dummy endpoint that always returns `"ok"`. Used mainly to check if
+the server is up and running.
 
 ### search
 
