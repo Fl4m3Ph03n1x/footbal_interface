@@ -43,37 +43,6 @@ defmodule FootbalInterface.RouterTest do
       assert connection.state == :sent
       assert connection.status == Status.code(:ok)
     end
-
-    test "returns 400 when request is empty" do
-      connection = Router.call(
-        conn(:get, "/search"),
-        @opts
-      )
-
-      assert connection.state == :sent
-      assert connection.status == Status.code(:bad_request)
-      assert connection.resp_body == "Empty Query"
-    end
-
-    test "returns 400 when request has incorrect headers" do
-      connection = Router.call(
-        conn(:get, "/search?Bananas=fruit"),
-        @opts
-      )
-
-      assert connection.state == :sent
-      assert connection.status == Status.code(:bad_request)
-    end
-
-    test "returns 400 when request has a non existent format" do
-      connection = Router.call(
-        conn(:get, "/search?Div=E0&format=bananas"),
-        @opts
-      )
-
-      assert connection.state == :sent
-      assert connection.status == Status.code(:bad_request)
-    end
   end
 
 end

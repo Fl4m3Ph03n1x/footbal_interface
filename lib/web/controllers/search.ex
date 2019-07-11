@@ -1,28 +1,25 @@
 defmodule FootbalInterface.Web.Controllers.Search do
   @moduledoc """
+  Maps the results of the search query made to HTTP and sends the response
+  to the client.
   """
 
-  alias FootbalEngine.QuickSearch
-  alias FootbalInterface.Formatter
+  alias FootbalInterface.Workflow.Search, as: Flow
   alias Plug.Conn
   alias Plug.Conn.Status
 
-  @spec process(Conn.t) :: Conn.t
-  def process(%Conn{} = conn) do
-    all_params =
-      conn
-      |> Conn.fetch_query_params()
-      |> Map.get(:query_params)
+  @default_deps [
+    run_flow: &Flow.run/1
+  ]
 
-    query_format = Map.get(all_params, "format", "json")
-    query_params = Map.delete(all_params, "format")
+  @spec process(Conn.t, keyword) :: Conn.t
+  def process(%Conn{} = conn, injected_deps \\ []) do
+    deps = Keyword.merge(@default_deps, injected_deps)
 
-    with  {:ok, db_query} <- parse(query_params),
-          {:ok, results}  <- QuickSearch.search(db_query),
-          {:ok, answer}   <- Formatter.format(results, query_format)
-    do
-      Conn.send_resp(conn, Status.code(:ok), answer)
-    else
+    case deps[:run_flow].(Conn.fetch_query_params(conn)) do
+      {:ok, answer} ->
+        Conn.send_resp(conn, Status.code(:ok), answer)
+
       {:error, :empty_query} ->
         Conn.send_resp(conn, Status.code(:bad_request), "Empty Query")
 
@@ -38,17 +35,6 @@ defmodule FootbalInterface.Web.Controllers.Search do
       {:error, :invalid_format, inv_format} ->
         Conn.send_resp(conn, Status.code(:bad_request), "Invalid format specified: #{inspect inv_format}")
     end
-  end
-
-  defp parse(params) when params === %{}, do: {:error, :empty_query}
-
-  defp parse(params) do
-    db_query =
-      params
-      |> Stream.map(fn {key, vals} -> {key, String.split(vals, ",")} end)
-      |> Enum.to_list()
-
-    {:ok, db_query}
   end
 
 end

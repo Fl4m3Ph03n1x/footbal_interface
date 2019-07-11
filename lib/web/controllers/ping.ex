@@ -7,6 +7,7 @@ defmodule FootbalInterface.Web.Controllers.Ping do
   alias Plug.Conn
   alias Plug.Conn.Status
 
+  @spec process(Conn.t) :: Conn.t
   def process(%Conn{} = conn), do: Conn.send_resp(conn, Status.code(:ok), "ok")
 
 end

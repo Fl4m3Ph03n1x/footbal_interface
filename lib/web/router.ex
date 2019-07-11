@@ -1,4 +1,9 @@
 defmodule FootbalInterface.Web.Router do
+  @moduledoc """
+  Plug Router for all incoming requests. Feeds the metrics modules with data
+  and dispatches the requests to the correct controllers after.
+  """
+
   use Plug.Router
 
   alias FootbalInterface.Web.Plugs.{MetricsExporter, MetricsInstrumenter}
