@@ -61,4 +61,4 @@ Will search for all games that have a Div.
 ## How to use it
 
 You can launch this app by running `iex -S mix`. That's it !
-If you want to learn more you can check the [official documentation]().
+If you want to learn more you can check the [official documentation](https://fl4m3ph03n1x.github.io/footbal_interface/api-reference.html).
