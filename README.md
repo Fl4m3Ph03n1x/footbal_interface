@@ -54,11 +54,11 @@ of April in 2017:
 
 `search?Date=2017-04-01`
 
-You can also search for all games that have a Div:
+You can also search for all games by passing an empty Header:
 
 `search?Div`
 
-Will search for all games that have a Div.
+Will search for all games.
 
 ## How to use it
 
