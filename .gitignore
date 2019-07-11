@@ -22,3 +22,6 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 footbal_interface-*.tar
 
+# VScode settings and plugins
+/.elixir_ls/
+/.vscode/
