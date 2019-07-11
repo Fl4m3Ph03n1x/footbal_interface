@@ -1,9 +1,0 @@
-{application,footbal_engine,
-             [{applications,[kernel,stdlib,elixir,logger,runtime_tools,csv,
-                             observer_cli]},
-              {description,"footbal_engine"},
-              {modules,['Elixir.FootbalEngine.Application',
-                        'Elixir.FootbalEngine.QuickSearch']},
-              {registered,[]},
-              {vsn,"0.1.0"},
-              {mod,{'Elixir.FootbalEngine.Application',[]}}]}.
