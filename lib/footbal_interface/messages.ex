@@ -1,4 +1,8 @@
 defmodule FootbalInterface.Messages do
+  @moduledoc """
+  Contains all the .proto schemas for Google's protool buffer format.
+  """
+
   use Protobuf, """
     syntax = "proto3";
 
