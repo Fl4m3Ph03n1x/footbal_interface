@@ -1,10 +1,32 @@
 defmodule FootbalInterface.Formatter do
+  @moduledoc """
+  Contains the logic to convert messages into the various protocols supported.
+  Currently supports JSON and Google's Protocol Buffer.
+  """
 
   alias FootbalInterface.Messages
 
-  @spec format(any, String.t) ::
-          {:ok, String.t}
-          | {:error, :invalid_format | :json_encoding_failed | :protobuff_encoding_failed, any}
+  @doc """
+  Receives a list of results and converts it to either JSON or protobuf.
+
+  Arguments:
+  - `results`: the list of results from a DB query.
+  - `format`: the format to convert to.
+
+  Returns:
+  - `{:ok, result}`: Tagged :ok tuple with the result in binary.
+  - `{:error, :invalid_format, inv_format}`: if the requested format is not
+    supported. `inv_format` is the invalid format.
+  - `{:error, :json_encoding_failed, err}`: if converting the data to JSON
+    failed. `err` is the error raised.
+  - `{:error, :protobuff_encoding_failed, err}`: if converting the data to
+    protobuff failed. `err` is the error raised.
+  """
+  @spec format(results :: [Map.t], format :: String.t) ::
+    {:ok, String.t}
+    | {:error, :invalid_format, String.t}
+    | {:error, :json_encoding_failed, any}
+    | {:error, :protobuff_encoding_failed, any}
   def format(results, "json") do
     {:ok, Jason.encode!(results, pretty: true)}
   rescue
