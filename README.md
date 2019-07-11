@@ -2,7 +2,7 @@
 
 ## What is it
 
-Interface for the Football application. This project is the sell around the
+Interface for the Football application. This project is the shell around the
 FootbalEngine project and it exposes the Engine's functionality to the world via
 a simple REST API.
 
