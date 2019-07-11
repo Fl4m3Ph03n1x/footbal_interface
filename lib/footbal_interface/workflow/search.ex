@@ -5,8 +5,8 @@ defmodule FootbalInterface.Workflow.Search do
 
   @behaviour FootbalInterface.Workflow
 
-  alias FootbalInterface.Formatter
   alias FootbalEngine.QuickSearch
+  alias FootbalInterface.Formatter
   alias FootbalInterface.Workflow
 
   @default_deps [
@@ -62,7 +62,11 @@ defmodule FootbalInterface.Workflow.Search do
   defp parse(params) do
     db_query =
       params
-      |> Stream.map(fn {key, vals} -> {key, String.split(vals, ",")} end)
+      |> Stream.map(fn
+        {key, ""} -> {key, []}
+        {key, nil} -> {key, []}
+        {key, vals} -> {key, String.split(vals, ",")}
+      end)
       |> Enum.to_list()
 
     {:ok, db_query}

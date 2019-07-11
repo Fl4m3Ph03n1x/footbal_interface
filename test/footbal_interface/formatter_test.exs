@@ -1,9 +1,13 @@
 defmodule FootbalInterface.FormatterTest do
   use ExUnit.Case
 
+  @moduletag :formatter
+
   alias FootbalInterface.Formatter
 
   describe "/format" do
+    @describetag :format
+
     test "encodes to JSON" do
       data = %{
         "AwayTeam"  => "Barcelona",
@@ -31,7 +35,7 @@ defmodule FootbalInterface.FormatterTest do
         "HTHG"      => 0,
         "HTR"       => "D",
         "HomeTeam"  => "La Coruna",
-        "Season"    => 201617
+        "Season"    => 201_617
       }]
 
       {:ok, _res} = Formatter.format(data, "protobuff")

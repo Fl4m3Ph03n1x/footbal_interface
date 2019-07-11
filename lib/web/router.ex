@@ -7,7 +7,7 @@ defmodule FootbalInterface.Web.Router do
   use Plug.Router
 
   alias FootbalInterface.Web.Plugs.{MetricsExporter, MetricsInstrumenter}
-  alias FootbalInterface.Web.Controllers.{Ping, Search, NotFound}
+  alias FootbalInterface.Web.Controllers.{NotFound, Ping, Search}
 
   plug(:match)
   plug(MetricsInstrumenter)
