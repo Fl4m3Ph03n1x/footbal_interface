@@ -34,7 +34,7 @@ defmodule FootbalInterface.MixProject do
       { :plug,              "~> 1.0"    },
       { :prometheus_plugs,  "~> 1.1.5"  },
       { :prometheus_ex,     "~> 3.0"    },
-      { :footbal_engine,    git: "git@github.com:Fl4m3Ph03n1x/footbal_engine.git",  tag: "0.1.0" },
+      { :footbal_engine,    git: "https://github.com/Fl4m3Ph03n1x/footbal_engine.git",  tag: "0.1.0" },
 
       # tracing
       { :observer_cli, "~> 1.5" },
