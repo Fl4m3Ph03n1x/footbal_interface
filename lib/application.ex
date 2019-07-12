@@ -30,6 +30,8 @@ defmodule FootbalInterface.Application do
     ]
     opts = [strategy: :one_for_one, name: FootbalInterface.Supervisor]
 
+    IO.puts(file_path)
+
     case QuickSearch.new(file_path) do
       {:ok, :indexation_successful} ->
         Logger.info("""
