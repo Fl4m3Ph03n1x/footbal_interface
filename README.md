@@ -69,8 +69,12 @@ If you want to learn more you can check the [official documentation](https://fl4
 
 This projects offers a convenient `Dockerfile` that will clone the latest
 version of the project for you to run on you local machine. To make use of it
-download the image and then execute:
+download the image:
 
-`sudo docker run -p 8080:8080 IMAGE`
+`docker pull fl4m3ph03n1x/footbal_app`
 
-And then connect to `localhost:8080` to start testing the API!
+And then execute:
+
+`docker run -p 8080:8080 IMAGE`
+
+Then connect to `localhost:8080` to start testing the API!
