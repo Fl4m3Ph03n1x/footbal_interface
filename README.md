@@ -64,3 +64,13 @@ Will search for all games.
 
 You can launch this app by running `iex -S mix`. That's it !
 If you want to learn more you can check the [official documentation](https://fl4m3ph03n1x.github.io/footbal_interface/api-reference.html).
+
+## Docker
+
+This projects offers a convenient `Dockerfile` that will clone the latest
+version of the project for you to run on you local machine. To make use of it
+download the image and then execute:
+
+`sudo docker run -p 8080:8080 IMAGE`
+
+And then connect to `localhost:8080` to start testing the API!
