@@ -10,7 +10,7 @@ a simple REST API.
 
 The public API has 2 endpoints:
 
-- `/ping` 
+- `/ping`
 - `/search`
 
 ### ping
