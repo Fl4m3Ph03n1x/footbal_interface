@@ -78,3 +78,23 @@ And then execute:
 `docker run -p 8080:8080 IMAGE`
 
 Then connect to `localhost:8080` to start testing the API!
+
+## Docker Swarm
+
+You can also create a swarm of little footbal apps, balanced by an HAProxy
+balancer.
+
+To do it you need to run the following commands:
+
+1. `docker swarm init`
+2. `docker stack deploy --compose-file=docker-compose.yml prod`
+3. Enjoy!
+
+After running these commands you can go to `localhost/ENDPOINT_NAME` and start
+using the swarm! Your requests will be redirected to the machine with least
+connections (preferred that over roundrobin) and you won't even know it.
+
+To confirm everything is running as expected, you can check the stack with the
+`docker service ls` command.
+
+Hope you enjoy!
