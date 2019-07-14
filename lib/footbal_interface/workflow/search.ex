@@ -5,12 +5,12 @@ defmodule FootbalInterface.Workflow.Search do
 
   @behaviour FootbalInterface.Workflow
 
-  alias FootbalEngine.QuickSearch
+  alias FootbalEngine
   alias FootbalInterface.Formatter
   alias FootbalInterface.Workflow
 
   @default_deps [
-    search: &QuickSearch.search/1,
+    search: &FootbalEngine.search/1,
     format: &Formatter.format/2
   ]
 

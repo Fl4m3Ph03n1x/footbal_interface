@@ -3,7 +3,7 @@ defmodule FootbalInterface.Application do
 
   use Application
 
-  alias FootbalEngine.QuickSearch
+  alias FootbalEngine
   alias FootbalInterface.Web.Router
   alias FootbalInterface.Web.Plugs.{MetricsExporter, MetricsInstrumenter}
   alias Plug.Cowboy
@@ -30,7 +30,7 @@ defmodule FootbalInterface.Application do
     ]
     opts = [strategy: :one_for_one, name: FootbalInterface.Supervisor]
 
-    case QuickSearch.new(file_path) do
+    case FootbalEngine.new(file_path) do
       {:ok, :indexation_successful} ->
         Logger.info("""
         Application launched successfully.
