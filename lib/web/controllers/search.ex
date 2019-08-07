@@ -34,6 +34,9 @@ defmodule FootbalInterface.Web.Controllers.Search do
 
       {:error, :invalid_format, inv_format} ->
         Conn.send_resp(conn, Status.code(:bad_request), "Invalid format specified: #{inspect inv_format}")
+
+      unknown_error  ->
+        Conn.send_resp(conn, Status.code(:internal_server_error), "Internal Issue: #{inspect unknown_error}")
     end
   end
 

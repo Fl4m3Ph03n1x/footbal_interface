@@ -8,8 +8,7 @@ defmodule FootbalInterface.Application do
   alias FootbalInterface.Web.Plugs.{MetricsExporter, MetricsInstrumenter}
   alias Plug.Cowboy
 
-  require Logger
-
+  @spec start(any, any) :: {:error, any} | {:ok, pid}
   def start(_type, _args) do
 
     MetricsExporter.setup()
@@ -26,41 +25,10 @@ defmodule FootbalInterface.Application do
     )
 
     children = [
-      cowboy_pool
+      cowboy_pool,
+      {FootbalEngine.Populator.Server, file_path}
     ]
     opts = [strategy: :one_for_one, name: FootbalInterface.Supervisor]
-
-    case FootbalEngine.new(file_path) do
-      {:ok, :indexation_successful} ->
-        Logger.info("""
-        Application launched successfully.
-        Waiting for requests.
-        """)
-        Supervisor.start_link(children, opts)
-
-      {:ok, :partial_indexation_successful, fails} ->
-        Logger.warn("""
-        Application launched with errors. Check the CSV file for:
-        #{inspect fails}
-        Waiting for requests.
-        """)
-        Supervisor.start_link(children, opts)
-
-      {:error, :no_valid_data_to_save} ->
-        Logger.error("""
-        Failed to launch application. CSV file has no valid data.
-        Shutting down.
-        """)
-        {:error, :invalid_csv}
-
-      {:error, reason} ->
-        Logger.error("""
-        Failed to launch application. An unknown error occurred:
-        #{inspect reason}
-        Shutting down.
-        """)
-        {:error, reason}
-    end
-
+    Supervisor.start_link(children, opts)
   end
 end
