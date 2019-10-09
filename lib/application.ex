@@ -26,7 +26,7 @@ defmodule FootbalInterface.Application do
 
     children = [
       cowboy_pool,
-      {FootbalEngine.Populator.Server, file_path}
+      {FootbalEngine, file_path}
     ]
     opts = [strategy: :one_for_one, name: FootbalInterface.Supervisor]
     Supervisor.start_link(children, opts)
